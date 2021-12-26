@@ -5,4 +5,14 @@
  * to customize this model
  */
 
-module.exports = {};
+import { v4 as uuidv4 } from 'uuid';
+
+module.exports = {
+    lifecycles: {
+        beforeCreate(data) {
+            if (!data.uid) {
+                data.uid = uuidv4();
+            }
+        }
+    }
+};
