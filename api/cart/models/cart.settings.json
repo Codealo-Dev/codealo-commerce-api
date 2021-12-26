@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "carts",
+  "info": {
+    "name": "Cart",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "customer": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "products_in_cart": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.cart-product"
+    },
+    "uuid": {
+      "type": "uid"
+    }
+  }
+}
