@@ -34,6 +34,11 @@ module.exports = {
         const { body } = ctx.request;
         body.customer = user;
 
+        const cart = await strapi.services.cart.findOne({card: body.cart});
+        assert(cart, 404, "No cart has been created");
+
+
+
         let entity;
         if (ctx.is('multipart')) {
             const { data, files } = parseMultipartData(ctx);
@@ -51,7 +56,7 @@ module.exports = {
         ctx.assert(entity, 404, 'Order not found');
         ctx.assert(entity.customer.id === user.id, 403, 'You cannot perform this action');
 
-        let entity = await strapi.services.order.update({ id: entity.id }, { 'cancelled': true });
+        entity = await strapi.services.order.update({ id: entity.id }, { 'cancelled': true });
         return sanitizeEntity(entity, { model: strapi.models.order });
     }
 };
