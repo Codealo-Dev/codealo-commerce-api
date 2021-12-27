@@ -5,7 +5,6 @@ services:
     plan: starter
     buildCommand: yarn install && yarn build
     startCommand: rsync -a public/ /data/public/ && yarn start
-    healthCheckPath: /_health
     disk:
       name: codealo-commerce-data
       mountPath: /data
