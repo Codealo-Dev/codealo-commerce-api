@@ -2,7 +2,7 @@ services:
   - type: web
     name: codealo-commerce-api
     env: node
-    plan: free
+    plan: starter
     buildCommand: yarn install && yarn build
     startCommand: rsync -a public/ /data/public/ && yarn start
     healthCheckPath: /_health
@@ -16,7 +16,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_FILENAME
-        value: /data/strapi.db
+        value: /data/codealo-commerce-api.db
       - key: JWT_SECRET
         generateValue: true
       - key: ADMIN_JWT_SECRET
