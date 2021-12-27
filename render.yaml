@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: strapi
+    name: codealo-commerce-api
     env: node
     plan: free
     buildCommand: yarn install && yarn build
