@@ -12,7 +12,7 @@ module.exports = {
     lifecycles: {
         beforeCreate(data) {
             if (!data.uid) {
-                data.uid = uuidv4();
+                data.uuid = uuidv4();
             }
         }
     }

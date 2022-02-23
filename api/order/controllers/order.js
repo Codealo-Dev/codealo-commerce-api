@@ -11,7 +11,7 @@ module.exports = {
     async find(ctx) {
         let entities;
         const { user } = ctx.state;
-        const { query } = ctx.query;
+        const { query } = ctx;
 
         query.customer = user.id;
 
@@ -34,17 +34,28 @@ module.exports = {
         const { body } = ctx.request;
         body.customer = user;
 
-        const cart = await strapi.services.cart.findOne({card: body.cart});
-        assert(cart, 404, "No cart has been created");
+        const cart = await strapi.services.cart.findOne({id: body.cart});
+        ctx.assert(cart, 404, "No cart has been created");
 
+        // const products = await strapi.services.products.find({
+        //     id: {'$in': cart.products_in_cart.map(p => p.product.id)}
+        // });
 
+        const total_no_tax = cart.products_in_cart.reduce((prev, cur) => prev += (cur.quantity * cur.product.price), 0);
+
+        const dto = {
+            products: cart.products_in_cart,
+            total_no_tax: parseFloat(total_no_tax.toFixed(2)),
+            total: parseFloat((total_no_tax * 1.2).toFixed(2)),
+            customer: user
+        }
 
         let entity;
         if (ctx.is('multipart')) {
             const { data, files } = parseMultipartData(ctx);
             entity = await strapi.services.order.create(data, { files });
         } else {
-            entity = await strapi.services.order.create(ctx.request.body);
+            entity = await strapi.services.order.create(dto);
         }
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
