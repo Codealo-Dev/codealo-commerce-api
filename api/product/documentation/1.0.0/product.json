@@ -668,6 +668,42 @@
               "draft",
               "published"
             ]
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "rating",
+                "body"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "rating": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -726,6 +762,12 @@
               "draft",
               "published"
             ]
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

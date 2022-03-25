@@ -631,6 +631,12 @@
                         "published"
                       ]
                     },
+                    "reviews": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
                     "created_by": {
                       "type": "string"
                     },
@@ -719,6 +725,12 @@
                         "draft",
                         "published"
                       ]
+                    },
+                    "reviews": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "created_by": {
                       "type": "string"

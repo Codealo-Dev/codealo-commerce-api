@@ -55,6 +55,10 @@
       ],
       "default": "published",
       "required": true
+    },
+    "reviews": {
+      "via": "product",
+      "collection": "reviews"
     }
   }
 }

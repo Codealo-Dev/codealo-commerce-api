@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/carts": {
+    "/reviews": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the reviews's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve reviews document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Cart"
+                    "$ref": "#/components/schemas/Reviews"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Cart"
+          "Reviews"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new reviews record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve reviews document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cart"
+                  "$ref": "#/components/schemas/Reviews"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Cart"
+          "Reviews"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCart"
+                "$ref": "#/components/schemas/NewReviews"
               }
             }
           }
         }
       }
     },
-    "/carts/count": {
+    "/reviews/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the number of reviews documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve reviews document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Cart"
+          "Reviews"
         ],
         "parameters": []
       }
     },
-    "/carts/{id}": {
+    "/reviews/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one reviews record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve reviews document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cart"
+                  "$ref": "#/components/schemas/Reviews"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Cart"
+          "Reviews"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single reviews record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve reviews document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cart"
+                  "$ref": "#/components/schemas/Reviews"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Cart"
+          "Reviews"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCart"
+                "$ref": "#/components/schemas/NewReviews"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single reviews record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single reviews based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Cart"
+          "Reviews"
         ],
         "parameters": [
           {
@@ -514,13 +514,79 @@
   },
   "components": {
     "schemas": {
-      "Cart": {
+      "Reviews": {
         "required": [
-          "id"
+          "id",
+          "rating",
+          "body"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "default": 1
+          },
+          "body": {
+            "type": "string"
+          },
+          "product": {
+            "required": [
+              "id",
+              "title",
+              "description",
+              "image",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "image": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "uid"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "options": {
+                "type": "component"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "published"
+                ]
+              },
+              "reviews": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           },
           "customer": {
             "required": [
@@ -567,170 +633,30 @@
               }
             }
           },
-          "products_in_cart": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "product": {
-                  "required": [
-                    "id",
-                    "title",
-                    "description",
-                    "image",
-                    "status"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "price": {
-                      "type": "number"
-                    },
-                    "image": {
-                      "type": "string"
-                    },
-                    "slug": {
-                      "type": "uid"
-                    },
-                    "categories": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "options": {
-                      "type": "component"
-                    },
-                    "status": {
-                      "type": "string",
-                      "enum": [
-                        "draft",
-                        "published"
-                      ]
-                    },
-                    "reviews": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "created_by": {
-                      "type": "string"
-                    },
-                    "updated_by": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "quantity": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "uuid": {
-            "type": "uid"
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
           }
         }
       },
-      "NewCart": {
+      "NewReviews": {
+        "required": [
+          "rating",
+          "body"
+        ],
         "properties": {
-          "customer": {
+          "rating": {
+            "type": "integer",
+            "default": 1
+          },
+          "body": {
             "type": "string"
           },
-          "products_in_cart": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "product": {
-                  "required": [
-                    "id",
-                    "title",
-                    "description",
-                    "image",
-                    "status"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "price": {
-                      "type": "number"
-                    },
-                    "image": {
-                      "type": "string"
-                    },
-                    "slug": {
-                      "type": "uid"
-                    },
-                    "categories": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "options": {
-                      "type": "component"
-                    },
-                    "status": {
-                      "type": "string",
-                      "enum": [
-                        "draft",
-                        "published"
-                      ]
-                    },
-                    "reviews": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "created_by": {
-                      "type": "string"
-                    },
-                    "updated_by": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "quantity": {
-                  "type": "integer"
-                }
-              }
-            }
+          "product": {
+            "type": "string"
           },
-          "uuid": {
-            "type": "uid"
+          "customer": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -748,7 +674,7 @@
   },
   "tags": [
     {
-      "name": "Cart"
+      "name": "Reviews"
     }
   ]
 }
