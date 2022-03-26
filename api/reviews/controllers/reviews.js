@@ -29,6 +29,7 @@ module.exports = {
         let orders = await strapi.services.order.find({ 'customer': user.id }, ['products']);
         console.log(orders[0].products, data);
         let hasPurchased = orders.some((o) => o.products.some(p => p.product.id == data.product));
+
         data.verifiedBuyer = Boolean(hasPurchased);
 
         data.customer = user.id;
