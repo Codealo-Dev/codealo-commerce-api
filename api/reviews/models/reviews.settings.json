@@ -22,6 +22,9 @@
       "type": "richtext",
       "required": true
     },
+    "verifiedBuyer": {
+      "type": "boolean"
+    },
     "product": {
       "model": "product",
       "via": "reviews"

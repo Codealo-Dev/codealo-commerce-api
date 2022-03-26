@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/25/2022 5:44:12 PM"
+    "x-generation-date": "03/26/2022 8:05:27 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -5019,10 +5019,6 @@
           },
           "uuid": {
             "type": "uid"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -5107,10 +5103,6 @@
           },
           "uuid": {
             "type": "uid"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -5354,10 +5346,6 @@
                 }
               }
             }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -5449,10 +5437,6 @@
                 }
               }
             }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -5633,6 +5617,9 @@
                 "body": {
                   "type": "string"
                 },
+                "verifiedBuyer": {
+                  "type": "boolean"
+                },
                 "product": {
                   "type": "string"
                 },
@@ -5736,6 +5723,9 @@
           },
           "body": {
             "type": "string"
+          },
+          "verifiedBuyer": {
+            "type": "boolean"
           },
           "product": {
             "required": [
@@ -5853,6 +5843,9 @@
           },
           "body": {
             "type": "string"
+          },
+          "verifiedBuyer": {
+            "type": "boolean"
           },
           "product": {
             "type": "string"

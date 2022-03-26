@@ -531,6 +531,9 @@
           "body": {
             "type": "string"
           },
+          "verifiedBuyer": {
+            "type": "boolean"
+          },
           "product": {
             "required": [
               "id",
@@ -647,6 +650,9 @@
           },
           "body": {
             "type": "string"
+          },
+          "verifiedBuyer": {
+            "type": "boolean"
           },
           "product": {
             "type": "string"
